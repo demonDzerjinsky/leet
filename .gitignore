@@ -1,0 +1,10 @@
+*/.mvn
+*/.settings
+*/target
+*/.classpath
+*/.factorypath
+*/.project
+.settings
+.project
+.classpath
+.factorypath
