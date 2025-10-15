@@ -13,7 +13,6 @@ public class SumDistTest {
         int[][] e = new int[][] { { 0, 1 }, { 0, 2 }, { 2, 3 }, { 2, 4 }, { 2, 5 } };
         int[] result = new int[n];
         int[] r = new int[n]; // i-element points to r[i] parent
-        int[] w = new int[n]; // weight
         r[0] = -1;
         for (int i = 1; i < n - 1; i++) {
             r[e[i][1]] = e[i][0];
@@ -31,30 +30,24 @@ public class SumDistTest {
                 }
                 r[ni] = buf;
             }
-            // calc node weights
+            // calc node weights sum
             for (int i = 0; i < n; i++) {
-                if (r[i] == -1) {
-                    w[i] = 0;
-                }
-                int cw = 0;
                 int ci = i;
                 while (r[ci] != -1) {
-                    cw++;
+                    result[cn]++;
                     ci = r[ci];
                 }
-                w[i] = cw;
             }
             // calc sum
-            System.out.println("tree");
             for (int i : r) {
                 System.out.print(String.format("%d ", i));
             }
             System.out.println();
-            System.out.println("weight");
-            for (int i : w) {
-                System.out.print(String.format("%d ", i));
-            }
-            System.out.println();
+        }
+        assertThat(result).containsOnly(new int[] { 8, 12, 6, 10, 10, 10 });
+        System.out.println();
+        for (int i : result) {
+            System.out.print(String.format("%d ", i));
         }
         // var result = app.sumDistancesInTree(n, edges);
         int[] expected = new int[] { 8, 12, 6, 10, 10, 10 };
